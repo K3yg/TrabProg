@@ -6,7 +6,7 @@ CORS(app)
 caminho = os.path.dirname(os.path.abspath(__file__))    
 arquivobd = os.path.join(caminho, "desenhos.db") 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///"+arquivobd 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # remover warnings 
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False 
 db = SQLAlchemy(app)
 
 from modelo import Desenho
@@ -35,6 +35,18 @@ def incluir_desenho():
         resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
     resposta.headers.add("Access-Control-Allow-Origin", "*") 
     return resposta
+
+@app.route("/excluir_desenho/<int:desenho_id>", methods=['DELETE'])
+def remover_paciente(desenho_id):
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    try:
+        Desenho.query.filter(Desenho.id == desenho_id).delete()
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
 
 app.run(debug=True)
 
