@@ -1,5 +1,5 @@
 from config import *
-from modelo import Desenho
+from modelo import Desenho, Genero, Personagem 
 from flask_cors import CORS
 app = Flask(__name__) 
 CORS(app)
@@ -9,8 +9,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///"+arquivobd
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False 
 db = SQLAlchemy(app)
 
-from modelo import Desenho
-
 @app.route("/")
 def padrao():
     return "Salve"
@@ -19,6 +17,22 @@ def padrao():
 def listar_desenhos():
     desenhos = db.session.query(Desenho).all()
     retorno = [ d.json() for d in desenhos ]
+    resposta = jsonify(retorno)
+    resposta.headers.add("Access-Control-Allow-Origin", "*") 
+    return resposta
+
+@app.route("/listar_generos")
+def listar_generos():
+    generos = db.session.query(Genero).all()
+    retorno = [ d.json() for d in generos ]
+    resposta = jsonify(retorno)
+    resposta.headers.add("Access-Control-Allow-Origin", "*") 
+    return resposta
+
+@app.route("/listar_personagens")
+def listar_personagens():
+    personagens = db.session.query(Personagem).all()
+    retorno = [ d.json() for d in personagens ]
     resposta = jsonify(retorno)
     resposta.headers.add("Access-Control-Allow-Origin", "*") 
     return resposta
