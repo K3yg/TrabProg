@@ -16,8 +16,11 @@ $( document ).ready(function() {
             lin = '<tr id="linha_'+desenhos[i].id+'">' +
             '<td>' + desenhos[i].nome + '</td>' + 
             '<td>' + desenhos[i].data_lancamento + '</td>' + 
-            '<td>' +  desenhos[i].criadores + '</td>' +
+            '<td>' + desenhos[i].criadores + '</td>' +
             '<td>' + desenhos[i].episodios + '</td>' + 
+            '<td>' + desenhos[i].genero.tipo + '</td>' + 
+            '<td>' + desenhos[i].genero.historia + '</td>' + 
+            '<td>' + desenhos[i].genero.popularidade + '</td>' + 
             '<td> <a href=# id="excluir_' + desenhos[i].id + '" ' +
                   'class="excluir_desenho"><img style="widht:30px; height:30px;" src="images/excluir.png" '+
                   'alt="Excluir desenho" title="Excluir desenho"></a>' + 
@@ -26,6 +29,32 @@ $( document ).ready(function() {
             $('#corpoTabelaDesenhos').append(lin);
     }}
 
+    $("#link_listar_personagens").click(function() {
+      $.ajax({
+        url: 'http://localhost:5000/listar_personagens',
+        method: 'GET',
+        dataType: 'json',
+        success: listar_personagens, 
+        error: function() {
+            alert("erro ao ler dados, verifique o backend");
+        }
+    });
+        function listar_personagens (personagens) {
+          $('#corpoTabelaPersonagens').empty();
+          for (var i in personagens) { 
+              lin = '<tr id="linha_'+personagens[i].id+'">' +
+              '<td>' + personagens[i].nome + '</td>' + 
+              '<td>' + personagens[i].altura + '</td>' + 
+              '<td>' + personagens[i].descricao + '</td>' +
+              '<td> <a href=# id="excluir_' + personagens[i].id + '" ' +
+                    'class="excluir_personagem"><img style="widht:30px; height:30px;" src="images/excluir.png" '+
+                    'alt="Excluir personagem" title="Excluir personagem"></a>' + 
+                  '</td>' + 
+              '</tr>';
+              $('#corpoTabelaPersonagens').append(lin);
+      }}
+
+      
     $(document).on("click", ".excluir_desenho", function() {
       var componente_clicado = $(this).attr('id');  
       var nome_icone = "excluir_";
@@ -84,3 +113,4 @@ $( document ).ready(function() {
       }
     });
 })});
+})
