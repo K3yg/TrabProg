@@ -20,6 +20,13 @@ def listar_desenhos():
     resposta = jsonify(retorno)
     resposta.headers.add("Access-Control-Allow-Origin", "*") 
     return resposta
+    
+def listar_personagens():
+    personagens = db.session.query(Personagem).all()
+    retorno = [ d.json() for d in personagens ]
+    resposta = jsonify(retorno)
+    resposta.headers.add("Access-Control-Allow-Origin", "*") 
+    return resposta
 
 @app.route("/listar_generos")
 def listar_generos():
