@@ -4,11 +4,10 @@
   <meta charset="utf-8">
   <title>Desenhos</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
 </head>
 <body>
  
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <a class="navbar-brand" href="#"><img src=images/drawing.png height="40px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,22 +16,50 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <span class="navbar-text">Cadastro de Desenhos</span> 
         <a class="nav-link nav-item" href="#">Início <span class="sr-only">(current)</span></a>
-        <a id="link_listar_desenhos" class="nav-link nav-item" href="#">Listar</a>
+        <a id="link_listar_desenhos" class="nav-link nav-item" href="#">Listar Desenhos</a>
+        <a id="link_listar_personagens" class="nav-link nav-item" href="#">Listar Personagens</a>
         <a class="nav-link nav-item" href="#" data-toggle="modal" data-target="#exampleModal">Incliur</a>
     </div>
-  </nav>    
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Data de Lançamento</th>
-        <th scope="col">Criadores</th>
-        <th scope="col">Episódios</th>
-      </tr>
-    </thead>
-    <tbody id="corpoTabelaDesenhos">
-    </tbody>
-  </table>
+  </nav>
+
+<h1>Lista de Desenhos</h1>
+
+   <div id="containerTable">     
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Data de Lançamento</th>
+          <th scope="col">Criadores</th>
+          <th scope="col">Episódios</th>
+          <th scope="col">Genêro</th>
+          <th scope="col">História</th>
+          <th scope="col">Popularidade</th>
+          <th scope="col">Operações</th>
+        </tr>
+      </thead>
+      <tbody id="corpoTabelaDesenhos">
+        
+      </tbody>
+    </table>
+  </div>
+  <br><br><br><br><br>
+  <h1>Lista de Personagens</h1>
+  <div id="containerTable2">     
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Altura</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Operações</th>
+        </tr>
+      </thead>
+      <tbody id="corpoTabelaPersonagens">
+        
+      </tbody>
+    </table>
+  </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -62,6 +89,7 @@
               <input type="text" class="form-control" id="episodios">
             </div>
           </form>
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
